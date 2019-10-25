@@ -1,14 +1,34 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Ionic Blank
+      Subir Imagen
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content padding>
+  <h3 *ngIf="images.length === 0" text-center>Selecciona imagen</h3>
+  <ion-list>
+    <ion-item *ngFor="let img of images; index as pos">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="img.path"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{ img.name }}</ion-label>
+      <ion-button slot="end" fill="clear" (click)="startUpload(img)">
+          <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+        </ion-button>
+      <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
+  
+<ion-footer>
+    <ion-toolbar color="primary">
+      <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+          Selecciona Imagen
+        </ion-button>
+    </ion-toolbar>
+  </ion-footer>
